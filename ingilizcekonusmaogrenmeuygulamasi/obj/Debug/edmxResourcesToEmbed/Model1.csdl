@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="İngilizceKonusmaOgrenmeUygulamasiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Egitmenler">
+    <Key>
+      <PropertyRef Name="EgitmenNo" />
+    </Key>
+    <Property Name="EgitmenNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EgitmenAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EgitmenTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EgitmenAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EgitmenUzmanlastigiKonu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KursiyerNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kursiyerler" Relationship="Self.FK_Egitmenler_Kursiyerler" FromRole="Egitmenler" ToRole="Kursiyerler" />
+    <NavigationProperty Name="Konular" Relationship="Self.FK_Konular_Egitmenler" FromRole="Egitmenler" ToRole="Konular" />
+  </EntityType>
+  <EntityType Name="Konular">
+    <Key>
+      <PropertyRef Name="KonuNo" />
+    </Key>
+    <Property Name="KonuNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KonuAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EgitmenNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Egitmenler" Relationship="Self.FK_Konular_Egitmenler" FromRole="Konular" ToRole="Egitmenler" />
+  </EntityType>
+  <EntityType Name="Kullanicilar">
+    <Key>
+      <PropertyRef Name="KullaniciNo" />
+    </Key>
+    <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Kursiyerler">
+    <Key>
+      <PropertyRef Name="KursiyerNo" />
+    </Key>
+    <Property Name="KursiyerNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KursiyerAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KursiyerTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KursiyerAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KursiyerDilSeviyesi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Egitmenlers" Relationship="Self.FK_Egitmenler_Kursiyerler" FromRole="Kursiyerler" ToRole="Egitmenler" />
+  </EntityType>
+  <Association Name="FK_Egitmenler_Kursiyerler">
+    <End Role="Kursiyerler" Type="Self.Kursiyerler" Multiplicity="1" />
+    <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kursiyerler">
+        <PropertyRef Name="KursiyerNo" />
+      </Principal>
+      <Dependent Role="Egitmenler">
+        <PropertyRef Name="KursiyerNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Konular_Egitmenler">
+    <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="1" />
+    <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Egitmenler">
+        <PropertyRef Name="EgitmenNo" />
+      </Principal>
+      <Dependent Role="Konular">
+        <PropertyRef Name="KonuNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="İngilizceKonusmaOgrenmeUygulamasiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Egitmenlers" EntityType="Self.Egitmenler" />
+    <EntitySet Name="Konulars" EntityType="Self.Konular" />
+    <EntitySet Name="Kullanicilars" EntityType="Self.Kullanicilar" />
+    <EntitySet Name="Kursiyerlers" EntityType="Self.Kursiyerler" />
+    <AssociationSet Name="FK_Egitmenler_Kursiyerler" Association="Self.FK_Egitmenler_Kursiyerler">
+      <End Role="Kursiyerler" EntitySet="Kursiyerlers" />
+      <End Role="Egitmenler" EntitySet="Egitmenlers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Konular_Egitmenler" Association="Self.FK_Konular_Egitmenler">
+      <End Role="Egitmenler" EntitySet="Egitmenlers" />
+      <End Role="Konular" EntitySet="Konulars" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

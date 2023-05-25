@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="İngilizceKonusmaOgrenmeUygulamasiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Egitmenler">
+          <Key>
+            <PropertyRef Name="EgitmenNo" />
+          </Key>
+          <Property Name="EgitmenNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EgitmenAdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="EgitmenTelefon" Type="varchar" MaxLength="50" />
+          <Property Name="EgitmenAdres" Type="varchar" MaxLength="50" />
+          <Property Name="EgitmenUzmanlastigiKonu" Type="varchar" MaxLength="50" />
+          <Property Name="KursiyerNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="KonuNo" />
+          </Key>
+          <Property Name="KonuNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KonuAdi" Type="varchar" MaxLength="50" />
+          <Property Name="EgitmenNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kursiyerler">
+          <Key>
+            <PropertyRef Name="KursiyerNo" />
+          </Key>
+          <Property Name="KursiyerNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KursiyerAdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="KursiyerTelefon" Type="varchar" MaxLength="50" />
+          <Property Name="KursiyerAdres" Type="varchar" MaxLength="50" />
+          <Property Name="KursiyerDilSeviyesi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Egitmenler_Kursiyerler">
+          <End Role="Kursiyerler" Type="Self.Kursiyerler" Multiplicity="1" />
+          <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kursiyerler">
+              <PropertyRef Name="KursiyerNo" />
+            </Principal>
+            <Dependent Role="Egitmenler">
+              <PropertyRef Name="KursiyerNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Konular_Egitmenler">
+          <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="1" />
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmenler">
+              <PropertyRef Name="EgitmenNo" />
+            </Principal>
+            <Dependent Role="Konular">
+              <PropertyRef Name="KonuNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="İngilizceKonusmaOgrenmeUygulamasiModelStoreContainer">
+          <EntitySet Name="Egitmenler" EntityType="Self.Egitmenler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konular" EntityType="Self.Konular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kursiyerler" EntityType="Self.Kursiyerler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Egitmenler_Kursiyerler" Association="Self.FK_Egitmenler_Kursiyerler">
+            <End Role="Kursiyerler" EntitySet="Kursiyerler" />
+            <End Role="Egitmenler" EntitySet="Egitmenler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Konular_Egitmenler" Association="Self.FK_Konular_Egitmenler">
+            <End Role="Egitmenler" EntitySet="Egitmenler" />
+            <End Role="Konular" EntitySet="Konular" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="İngilizceKonusmaOgrenmeUygulamasiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Egitmenler">
+          <Key>
+            <PropertyRef Name="EgitmenNo" />
+          </Key>
+          <Property Name="EgitmenNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EgitmenAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EgitmenTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EgitmenAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EgitmenUzmanlastigiKonu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KursiyerNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kursiyerler" Relationship="Self.FK_Egitmenler_Kursiyerler" FromRole="Egitmenler" ToRole="Kursiyerler" />
+          <NavigationProperty Name="Konular" Relationship="Self.FK_Konular_Egitmenler" FromRole="Egitmenler" ToRole="Konular" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="KonuNo" />
+          </Key>
+          <Property Name="KonuNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KonuAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EgitmenNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Egitmenler" Relationship="Self.FK_Konular_Egitmenler" FromRole="Konular" ToRole="Egitmenler" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Kursiyerler">
+          <Key>
+            <PropertyRef Name="KursiyerNo" />
+          </Key>
+          <Property Name="KursiyerNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KursiyerAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KursiyerTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KursiyerAdres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KursiyerDilSeviyesi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Egitmenlers" Relationship="Self.FK_Egitmenler_Kursiyerler" FromRole="Kursiyerler" ToRole="Egitmenler" />
+        </EntityType>
+        <Association Name="FK_Egitmenler_Kursiyerler">
+          <End Role="Kursiyerler" Type="Self.Kursiyerler" Multiplicity="1" />
+          <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kursiyerler">
+              <PropertyRef Name="KursiyerNo" />
+            </Principal>
+            <Dependent Role="Egitmenler">
+              <PropertyRef Name="KursiyerNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Konular_Egitmenler">
+          <End Role="Egitmenler" Type="Self.Egitmenler" Multiplicity="1" />
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmenler">
+              <PropertyRef Name="EgitmenNo" />
+            </Principal>
+            <Dependent Role="Konular">
+              <PropertyRef Name="KonuNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="İngilizceKonusmaOgrenmeUygulamasiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Egitmenlers" EntityType="Self.Egitmenler" />
+          <EntitySet Name="Konulars" EntityType="Self.Konular" />
+          <EntitySet Name="Kullanicilars" EntityType="Self.Kullanicilar" />
+          <EntitySet Name="Kursiyerlers" EntityType="Self.Kursiyerler" />
+          <AssociationSet Name="FK_Egitmenler_Kursiyerler" Association="Self.FK_Egitmenler_Kursiyerler">
+            <End Role="Kursiyerler" EntitySet="Kursiyerlers" />
+            <End Role="Egitmenler" EntitySet="Egitmenlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Konular_Egitmenler" Association="Self.FK_Konular_Egitmenler">
+            <End Role="Egitmenler" EntitySet="Egitmenlers" />
+            <End Role="Konular" EntitySet="Konulars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="İngilizceKonusmaOgrenmeUygulamasiModelStoreContainer" CdmEntityContainer="İngilizceKonusmaOgrenmeUygulamasiEntities">
+          <EntitySetMapping Name="Egitmenlers">
+            <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Egitmenler">
+              <MappingFragment StoreEntitySet="Egitmenler">
+                <ScalarProperty Name="EgitmenNo" ColumnName="EgitmenNo" />
+                <ScalarProperty Name="EgitmenAdSoyad" ColumnName="EgitmenAdSoyad" />
+                <ScalarProperty Name="EgitmenTelefon" ColumnName="EgitmenTelefon" />
+                <ScalarProperty Name="EgitmenAdres" ColumnName="EgitmenAdres" />
+                <ScalarProperty Name="EgitmenUzmanlastigiKonu" ColumnName="EgitmenUzmanlastigiKonu" />
+                <ScalarProperty Name="KursiyerNo" ColumnName="KursiyerNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Konulars">
+            <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Konular">
+              <MappingFragment StoreEntitySet="Konular">
+                <ScalarProperty Name="KonuNo" ColumnName="KonuNo" />
+                <ScalarProperty Name="KonuAdi" ColumnName="KonuAdi" />
+                <ScalarProperty Name="EgitmenNo" ColumnName="EgitmenNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilars">
+            <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kursiyerlers">
+            <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Kursiyerler">
+              <MappingFragment StoreEntitySet="Kursiyerler">
+                <ScalarProperty Name="KursiyerNo" ColumnName="KursiyerNo" />
+                <ScalarProperty Name="KursiyerAdSoyad" ColumnName="KursiyerAdSoyad" />
+                <ScalarProperty Name="KursiyerTelefon" ColumnName="KursiyerTelefon" />
+                <ScalarProperty Name="KursiyerAdres" ColumnName="KursiyerAdres" />
+                <ScalarProperty Name="KursiyerDilSeviyesi" ColumnName="KursiyerDilSeviyesi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

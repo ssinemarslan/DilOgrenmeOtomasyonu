@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="İngilizceKonusmaOgrenmeUygulamasiModelStoreContainer" CdmEntityContainer="İngilizceKonusmaOgrenmeUygulamasiEntities">
+    <EntitySetMapping Name="Egitmenlers">
+      <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Egitmenler">
+        <MappingFragment StoreEntitySet="Egitmenler">
+          <ScalarProperty Name="EgitmenNo" ColumnName="EgitmenNo" />
+          <ScalarProperty Name="EgitmenAdSoyad" ColumnName="EgitmenAdSoyad" />
+          <ScalarProperty Name="EgitmenTelefon" ColumnName="EgitmenTelefon" />
+          <ScalarProperty Name="EgitmenAdres" ColumnName="EgitmenAdres" />
+          <ScalarProperty Name="EgitmenUzmanlastigiKonu" ColumnName="EgitmenUzmanlastigiKonu" />
+          <ScalarProperty Name="KursiyerNo" ColumnName="KursiyerNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Konulars">
+      <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Konular">
+        <MappingFragment StoreEntitySet="Konular">
+          <ScalarProperty Name="KonuNo" ColumnName="KonuNo" />
+          <ScalarProperty Name="KonuAdi" ColumnName="KonuAdi" />
+          <ScalarProperty Name="EgitmenNo" ColumnName="EgitmenNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicilars">
+      <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Kullanicilar">
+        <MappingFragment StoreEntitySet="Kullanicilar">
+          <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kursiyerlers">
+      <EntityTypeMapping TypeName="İngilizceKonusmaOgrenmeUygulamasiModel.Kursiyerler">
+        <MappingFragment StoreEntitySet="Kursiyerler">
+          <ScalarProperty Name="KursiyerNo" ColumnName="KursiyerNo" />
+          <ScalarProperty Name="KursiyerAdSoyad" ColumnName="KursiyerAdSoyad" />
+          <ScalarProperty Name="KursiyerTelefon" ColumnName="KursiyerTelefon" />
+          <ScalarProperty Name="KursiyerAdres" ColumnName="KursiyerAdres" />
+          <ScalarProperty Name="KursiyerDilSeviyesi" ColumnName="KursiyerDilSeviyesi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
